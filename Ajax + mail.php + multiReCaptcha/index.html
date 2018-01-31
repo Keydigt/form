@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+		<title>MultiReCaptcha</title>
+
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	</head>
+
+	<body>
+		<form id="form_1">
+			<h1>Form_1</h1>
+
+			<input type="tel"
+				name="tel"
+				placeholder="Ваш телефон *"
+				required=""
+				minlength="5">
+
+			<div class="g-recaptcha"></div>
+
+			<input type="hidden" name="subject" value="Заявка с Form_1" />
+			<button type="submit">Оформить заявку 1</button>
+
+			<div class="msgs"></div>
+		</form>
+
+		<form id="form_2">
+			<h1>Form_1</h1>
+
+			<input type="tel"
+				name="tel"
+				placeholder="Ваш телефон *"
+				required=""
+				minlength="5">
+
+			<div class="g-recaptcha"></div>
+
+			<input type="hidden" name="subject" value="Заявка с Form_3" />
+			<button type="submit">Оформить заявку 2</button>
+
+			<div class="msgs"></div>
+		</form>
+
+		<form id="form_3">
+			<h1>Form_1</h1>
+
+			<input type="tel"
+				name="tel"
+				placeholder="Ваш телефон *"
+				required=""
+				minlength="5">
+
+			<div class="g-recaptcha"></div>
+
+			<input type="hidden"
+				name="subject"
+				value="Заявка с Form_3" />
+
+			<button type="submit">Оформить заявку 3</button>
+
+			<div class="msgs"></div>
+		</form>
+
+		<!-- Include Jquery 1.9.1 93 kB no-Gzip (35 kB with Gzip) -->
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+		<!-- Include main.js with Ajax function -->
+		<script defer type="text/javascript" src="main.js"></script>
+
+		<!-- Include recaptcha.js
+			onload = onloadCallback // important function for MultiReCaptcha
+			render = explicit // Отложенный рендер капчи
+			https://developers.google.com/recaptcha/docs/display#explicit_render
+		-->
+		<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
+
+		<!-- onloadCallback
+			your_key = not secret key from https://www.google.com/recaptcha/admin
+		-->
+		<script>
+			var onloadCallback = function() {
+				var divcaptcha = document.getElementsByClassName('g-recaptcha');
+				for (var i = 0; i < divcaptcha.length; i++) {
+					grecaptcha.render(divcaptcha[i], {
+						'sitekey': 'your_key',
+						'size': 'compact'
+					});
+				}
+			};
+		</script>
+	</body>
+</html>
