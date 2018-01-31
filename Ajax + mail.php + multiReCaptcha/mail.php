@@ -33,36 +33,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 		// Смотрим на результат
 		if($curlData['success']) {
-					$tel = $teldesc = $subject = '';
+					$tel = $tel_desc = $subject = '';
 
 					// Получаем пост от input в форме
 					if (isset($_POST['tel']) && !empty($_POST['tel'])) {
 						$tel = strip_tags($_POST['tel'])."<br>";
-						$teldesc = "<b>Телефон:</b>";
+						$tel_desc = "<b>Телефон:</b> ";
 					}
 
 					// Получаем пост от input темы в форме
 					if (isset($_POST['subject']) && !empty($_POST['subject'])) {
-						$subject = strip_tags($_POST['subject'])."<br>";
+						$subject = strip_tags($_POST['subject']);
 					} else {
 						$subject = "Заявка с формы на сайте";
 					}
 
 
 					// Получатель и отправитель
-					$to 	  = "admin@keydiweb.ru";
-					$sendfrom = "admin@keydiweb.ru";
+					$to 	  = "admin@localhost.com";
+					$sendfrom = "admin@localhost.com";
 
 					$headers  = "From: " . strip_tags($sendfrom) . "\r\n";
 					$headers .= "Reply-To: ". strip_tags($sendfrom) . "\r\n";
 					$headers .= "MIME-Version: 1.0\r\n";
 					$headers .= "Content-Type: text/html;charset=utf-8 \r\n";
 					// Скрытая копия, расскоментировать если понадобится
-					// $headers .= "Bcc: admin@keydiweb.ru \r\n";
+					// $headers .= "Bcc: admin@localhost.com\r\n";
 
 					// ip отправителя и содержимое письма
-					$ip       = "<br>ip:".$_SERVER['REMOTE_ADDR'];
-					$message  = "$tel $ip";
+					$ip       = "<br/>ip:".$_SERVER['REMOTE_ADDR'];
+					$message  = "$tel_desc $tel $ip";
 
 					// Отправка письма
 					$send     = mail ($to, $subject, $message, $headers);
